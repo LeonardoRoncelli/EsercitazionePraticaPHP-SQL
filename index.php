@@ -30,6 +30,29 @@ while($a = $res->fetch_assoc()){
 }
 ?>
 </select>
-
+<hr>
+<h2>Inserisci Prestito</h2>
+<form method="POST">
+<input type="hidden" name="azione" value="prestito">
+Libro:
+<select name="id_libro">
+<?php
+$res = $conn->query("SELECT * FROM Libri");
+while($l = $res->fetch_assoc()){
+    echo "<option value='{$l['id_libro']}'>{$l['titolo']}</option>";
+}
+?>
+</select>
+Utente:
+<select name="id_utente">
+<?php
+$res = $conn->query("SELECT * FROM Utenti");
+while($u = $res->fetch_assoc()){
+    echo "<option value='{$u['id_utente']}'>{$u['nome']} {$u['cognome']}</option>";
+}
+?>
+</select>
+Data fine:
+<input type="date" name="data_fine" required>
 <button>Salva</button>
 </form>
