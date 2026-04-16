@@ -3,6 +3,10 @@ $conn = new mysqli("localhost", "root", "", "roncelli_biblioteca");
 if ($conn->connect_error) {
     die("Errore connessione");
 }
+if(isset($_POST['azione']) && $_POST['azione'] == 'prestito'){
+    $conn->query("INSERT INTO Prestiti (id_libro, id_utente, data_inizio, data_fine_prevista)
+                  VALUES ('$_POST[id_libro]', '$_POST[id_utente]', CURDATE(), '$_POST[data_fine]')");
+}
 ?>
 <?php
 if(isset($_POST['azione']) && $_POST['azione'] == 'libro'){
