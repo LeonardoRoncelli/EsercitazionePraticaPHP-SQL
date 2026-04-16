@@ -67,5 +67,28 @@ while($u = $res->fetch_assoc()){
 </select>
 <button>Mostra</button>
 </form>
+<?php
+if(isset($_GET['utente'])){
+    $id = $_GET['utente'];
+    $res = $conn->query("
+        SELECT Prestiti.*, Libri.titolo
+        FROM Prestiti
+        JOIN Libri ON Prestiti.id_libro = Libri.id_libro
+        WHERE id_utente = $id
+    ");
+
+    while($p = $res->fetch_assoc()){
+        echo "<p>{$p['titolo']} - ";
+
+        if($p['restituito']){
+            echo "Restituito";
+        } else {
+            echo "<a href='?utente=$id&restituisci={$p['id_prestito']}'>Restituisci</a>";
+        }
+
+        echo "</p>";
+    }
+}
+?>
 <button>Salva</button>
 </form>
