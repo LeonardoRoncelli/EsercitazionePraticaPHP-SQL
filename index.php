@@ -54,5 +54,18 @@ while($u = $res->fetch_assoc()){
 </select>
 Data fine:
 <input type="date" name="data_fine" required>
+<hr>
+<h2>Prestiti per utente</h2>
+<form method="GET">
+<select name="utente">
+<?php
+$res = $conn->query("SELECT * FROM Utenti");
+while($u = $res->fetch_assoc()){
+    echo "<option value='{$u['id_utente']}'>{$u['nome']} {$u['cognome']}</option>";
+}
+?>
+</select>
+<button>Mostra</button>
+</form>
 <button>Salva</button>
 </form>
